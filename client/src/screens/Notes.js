@@ -20,9 +20,9 @@ export default function Notes() {
   let initailIndex = 0;
   const [selectedSubject, setselectedSubject] = useState(0);
 
- function displayNotes(index){
-  console.log(notes.subjects[index].notes)
- }
+  function selectSem(year,sem){
+    dispatch(getAllSubject(year,sem))
+  }
 
  function selectSubject(index)  {
    setselectedSubject(index);
@@ -41,10 +41,10 @@ export default function Notes() {
         </div>
         <div className="select-sem-option">
           <div className="ss-option ss-option-active">
-            <Link to="?year=1&sem=1">ODD</Link>
+            <Link to="?year=1&sem=1" onClick={()=>{selectSem(notes.year,'1')}}>ODD</Link>
           </div>
           <div className="ss-option">
-            <Link to="">EVEN</Link>
+            <Link to="" onClick={()=>{selectSem(notes.year,'2')}}>EVEN</Link>
           </div>
         </div>
       </div>
@@ -77,15 +77,7 @@ export default function Notes() {
               })
             )}
           </div>
-        <div>
-          <div>
-            {
-             
-                
-              
-            }
-          </div>
-        </div>
+      
         </div>
       </div>
       {loading ? (
