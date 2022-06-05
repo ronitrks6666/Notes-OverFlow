@@ -1,0 +1,69 @@
+
+
+
+
+
+
+
+
+
+
+
+{
+    "college":"SRM",
+    "year":"1",
+    "sem":"1",
+    "subjects":[
+        {
+            "name":"Software management and design",
+            "codename":"SEPM",
+            "notes":[
+                {
+                    "notetitle":"Unit 1",
+                    "notelink":"www.google.com"
+                },
+                {
+                    "notetitle":"Unit 2",
+                    "notelink":"www.google.com"
+                },{
+                    "notetitle":"Unit 3",
+                    "notelink":"www.google.com"
+                }
+            ]
+        },
+        {
+            "name":"Datastructure and algo design",
+            "codename":"DSA",
+            "notes":[
+                {
+                    "notetitle":"Merges PDF",
+                    "notelink":"www.google.com"
+                },
+                {
+                    "notetitle":"Unit 2",
+                    "notelink":"www.google.com"
+                },{
+                    "notetitle":"All in one",
+                    "notelink":"www.google.com"
+                }
+            ]
+        },{
+            "name":"Computer Communication",
+            "codename":"CC",
+            "notes":[
+                {
+                    "notetitle":"Unit 1",
+                    "notelink":"www.google.com"
+                },
+                {
+                    "notetitle":"Important topics",
+                    "notelink":"www.google.com"
+                },{
+                    "notetitle":"Unit 3",
+                    "notelink":"www.google.com"
+                }
+            ]
+        }
+    ]
+
+}
