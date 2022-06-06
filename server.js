@@ -16,7 +16,7 @@ app.use('/api',notesRoute)
 
 
 
-
+ 
 app.listen(8000,(req,res)=>{
     console.log("Server is running :]")
 })

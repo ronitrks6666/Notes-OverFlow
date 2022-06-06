@@ -12,16 +12,30 @@ import axios from 'axios'
 
 
 
-export const getAllSubject = (year,sem) => async (dispatch) => {
+export const getAllSubject = (curyear , cursem) => async (dispatch) => {
     console.log('action called')
   dispatch({ type: "GET_SUBJECT_REQUEST" });
+  let year =''
+  let sem =''
   try {
-    if(!year & !sem){
-      console.log("no year and sem")
-      year="1"
-      sem="1"
+    if(!cursem){
+
+      let text = window.location.href
+      let yearIndex = text.indexOf("year")
+      let semIndex = text.indexOf("sem")
+      // console.log(yearIndex , semIndex)
+      sem = text.substring(semIndex+4,semIndex+5)
+      year = text.substring(yearIndex+5,yearIndex+6)
+      // console.log(year , sem , "sem year fomr link")
     }
-    let college="SRM"
+    else{
+      sem = cursem
+      year = curyear
+    }
+    let college=localStorage.getItem("NOF_COLLEGE") ?localStorage.getItem("NOF_COLLEGE") : window.location.href = "/"
+    college =college.toUpperCase()
+   
+
 
     // const data = {
     //   college: "SRM",
@@ -155,7 +169,13 @@ export const getAllSubject = (year,sem) => async (dispatch) => {
     // };
     const response = await axios.get(`/api/notes/${college}/${year}?sem=${sem}`)
     console.log(response.data)
-    dispatch({ type: "GET_SUBJECT_SUCCESS", payload: response.data });
+    if (!response.data){
+      dispatch({type:"GET_SUBJECT_NULL" , payload:{notFound:"No data Found :[" , year:year ,sem:sem}})
+    }
+    else{
+      dispatch({ type: "GET_SUBJECT_SUCCESS", payload: {data:response.data ,sem:sem} });
+    }
+
   } catch (error) {
     dispatch({ type: "GET_SUBJECT_FAILED", payload: error });
     console.log(error);

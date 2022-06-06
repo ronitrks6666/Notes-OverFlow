@@ -12,14 +12,16 @@ import Overview from './screens/Overview';
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+
       <BrowserRouter>
+        <Navbar />
         <Routes>
-          <Route path="/" exact element={<Home/>} /> 
-          <Route path="/selectyear" exact element={<Overview/>}/>
-          <Route path="/note" exact element={<Notes/> }/>
+
+          <Route path="/" exact element={<Home />} />
+          <Route path="/selectyear" exact element={<Overview />} />
+          <Route path="/note" exact element={<Notes />} />
         </Routes>
-      </BrowserRouter> 
+      </BrowserRouter>
     </div>
   );
 }

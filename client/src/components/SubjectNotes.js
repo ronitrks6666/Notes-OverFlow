@@ -10,7 +10,7 @@ import React from "react";
 
 
 export default function SubjectNotes({ notes , subjectname}) {
-  console.log(notes);
+  // console.log(notes);
   return (
     <div>
       <div className="subject-notes">

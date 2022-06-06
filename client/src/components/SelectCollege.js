@@ -19,6 +19,8 @@ export default function SelectCollege() {
 
     function searchCollege(e){
         e.preventDefault()
+        localStorage.setItem("NOF_COLLEGE", inputText);
+        window.location.href = "/selectyear"
         console.log(inputText)
     }
     return (

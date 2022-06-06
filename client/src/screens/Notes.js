@@ -10,26 +10,37 @@ import { getAllSubject } from "../actions/SubjectAction";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
+
+
+
+
+
+
 export default function Notes() {
   const dispatch = useDispatch();
 
   const Notes = useSelector((state) => state.getAllSubjectReducer);
-  const { notes, error, loading } = Notes;
-  console.log(notes);
+  const { notes, error, loading , notFound ,year , sem} = Notes;
 
   let initailIndex = 0;
   const [selectedSubject, setselectedSubject] = useState(0);
 
+
+  // for active subject
+
   function selectSem(year,sem){
+    console.log("year and sem" , year , sem)
     dispatch(getAllSubject(year,sem))
   }
 
- function selectSubject(index)  {
+ function selectSubject(index,selectedSub)  {
    setselectedSubject(index);
   // displayNotes(index)
   }
+  
 
   useEffect(() => {
+    
     dispatch(getAllSubject());
   }, []);
 
@@ -40,11 +51,11 @@ export default function Notes() {
           <h3>Semester</h3>
         </div>
         <div className="select-sem-option">
-          <div className="ss-option ss-option-active">
-            <Link to="?year=1&sem=1" onClick={()=>{selectSem(notes.year,'1')}}>ODD</Link>
+          <div className={`ss-option ${sem=="1" ? "ss-option-active" : '' }` } >
+            <Link  to={`?year=${year ? year : notes.year}&sem=1`} onClick={()=>{selectSem(year ? year : notes.year,'1')}}>ODD</Link>
           </div>
-          <div className="ss-option">
-            <Link to="" onClick={()=>{selectSem(notes.year,'2')}}>EVEN</Link>
+          <div className={`ss-option ${sem=="2" ? "ss-option-active" : '' }`}>
+            <Link to={`?year=${year ? year : notes.year}&sem=2`} onClick={()=>{selectSem(year ? year : notes.year,'2')}}>EVEN</Link>
           </div>
         </div>
       </div>
@@ -63,7 +74,10 @@ export default function Notes() {
               <Loading />
             ) : error ? (
               <Error error="Something Went Wrong" />
-            ) : (
+            ) : notFound ? (
+              <Error error="Not data found :[ " />
+            ) :
+             (
               notes.subjects.map((subject) => {
                 initailIndex = initailIndex + 1;
                 return (
@@ -72,6 +86,7 @@ export default function Notes() {
                     subject={subject}
                     index={initailIndex}
                     selectSubject={selectSubject}
+                    selectedsub = {selectedSubject}
                   />
                 );
               })
@@ -84,6 +99,8 @@ export default function Notes() {
               <Loading />
             ) : error ? (
               <Error error="Something Went Wrong" />
+            ) : notFound ? (
+              <div> </div>
             ) : (
               <SubjectNotes notes={notes.subjects[selectedSubject].notes} subjectname = {notes.subjects[selectedSubject].name } />
             )}
