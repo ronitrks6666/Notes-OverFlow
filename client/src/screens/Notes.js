@@ -10,11 +10,11 @@ import { getAllSubject } from "../actions/SubjectAction";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
+//https://docs.google.com/document/d/1-QhSNQe0S25dxOERMb1OE_jkspRM14_9/edit?usp=sharing&ouid=117268227935666193965&rtpof=true&sd=true
 
+// https://docs.google.com/document/d/1sLr8JI4S3uIyVTGO4l201KZRMnqa4krg/edit?usp=sharing&ouid=117268227935666193965&rtpof=true&sd=true
 
-
-
-
+//https://drive.google.com/uc?export=download&id=1sLr8JI4S3uIyVTGO4l201KZRMnqa4krg
 
 export default function Notes() {
   const dispatch = useDispatch();

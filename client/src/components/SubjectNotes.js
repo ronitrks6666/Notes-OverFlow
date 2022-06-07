@@ -1,15 +1,25 @@
 import React from "react";
+import { useState } from "react";
 
 
 
 
 
 
+export default function SubjectNotes({ notes, subjectname }) {
 
 
 
 
-export default function SubjectNotes({ notes , subjectname}) {
+
+  const [copyText, setcopyText] = useState('Copy')
+
+  function copied(e){
+    // to change the copied text to copy and the back to copy
+    e.target.innerText = "Copied"
+    setTimeout(()=>{e.target.innerText = "Copy"}, 2000)
+  }
+
   // console.log(notes);
   return (
     <div>
@@ -35,13 +45,33 @@ export default function SubjectNotes({ notes , subjectname}) {
                   </div>
                 </div>
                 <div className="sn-unit-files">
-                    {
-                        note.material.map((material)=>{
-                            return(
-                                <div className="sn-unit-file-content">{material.heading}</div>
-                            )
-                        })
-                    }
+                  {note.material.map((material) => {
+                    return (
+                      <div className="sn-unit-file-box">
+                        <div className="sn-unit-file-content">
+                          {material.heading}
+                        </div>
+
+                        <div className="sn-unit-file-link mx-auto my-2">
+                          <button
+                            type="button"
+                            class="btn btn-primary btn-sm download-link"
+                          >
+                            <a href={material.link}> Download </a>
+                          </button>
+                          <button
+                            className=" btn btn-success btn-sm mx-4"
+                            onClick={(e) => {
+                              navigator.clipboard.writeText(material.link);
+                              copied(e)
+                            }}
+                          >
+                            {copyText}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             );
