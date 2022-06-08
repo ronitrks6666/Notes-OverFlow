@@ -10,37 +10,32 @@ import { getAllSubject } from "../actions/SubjectAction";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
-//https://docs.google.com/document/d/1-QhSNQe0S25dxOERMb1OE_jkspRM14_9/edit?usp=sharing&ouid=117268227935666193965&rtpof=true&sd=true
-
-// https://docs.google.com/document/d/1sLr8JI4S3uIyVTGO4l201KZRMnqa4krg/edit?usp=sharing&ouid=117268227935666193965&rtpof=true&sd=true
-
-//https://drive.google.com/uc?export=download&id=1sLr8JI4S3uIyVTGO4l201KZRMnqa4krg
-
 export default function Notes() {
+  window.onpopstate = () => {
+    navigate("/selectyear");
+  };
+
   const dispatch = useDispatch();
 
   const Notes = useSelector((state) => state.getAllSubjectReducer);
-  const { notes, error, loading , notFound ,year , sem} = Notes;
+  const { notes, error, loading, notFound, year, sem  } = Notes;
 
   let initailIndex = 0;
   const [selectedSubject, setselectedSubject] = useState(0);
 
-
   // for active subject
 
-  function selectSem(year,sem){
-    console.log("year and sem" , year , sem)
-    dispatch(getAllSubject(year,sem))
+  function selectSem(year, sem) {
+    console.log("year and sem", year, sem);
+    dispatch(getAllSubject(year, sem));
   }
 
- function selectSubject(index,selectedSub)  {
-   setselectedSubject(index);
-  // displayNotes(index)
+  function selectSubject(index, selectedSub) {
+    setselectedSubject(index);
+    // displayNotes(index)
   }
-  
 
   useEffect(() => {
-    
     dispatch(getAllSubject());
   }, []);
 
@@ -51,11 +46,29 @@ export default function Notes() {
           <h3>Semester</h3>
         </div>
         <div className="select-sem-option">
-          <div className={`ss-option ${sem=="1" ? "ss-option-active" : '' }` } >
-            <Link  to={`?year=${year ? year : notes.year}&sem=1`} onClick={()=>{selectSem(year ? year : notes.year,'1')}}>ODD</Link>
+          <div className={`ss-option ${sem == "1" ? "ss-option-active" : ""}`}>
+          <div className="sem-select-text">
+            <Link 
+              to={`?year=${year ? year : notes.year}&sem=1`}
+              onClick={() => {
+                selectSem(year ? year : notes.year, "1");
+              }}
+            >
+              ODD
+            </Link>
+            </div>
           </div>
-          <div className={`ss-option ${sem=="2" ? "ss-option-active" : '' }`}>
-            <Link to={`?year=${year ? year : notes.year}&sem=2`} onClick={()=>{selectSem(year ? year : notes.year,'2')}}>EVEN</Link>
+          <div className={`ss-option ${sem == "2" ? "ss-option-active" : ""}`}>
+            <div className="sem-select-text">
+              <Link
+                to={`?year=${year ? year : notes.year}&sem=2`}
+                onClick={() => {
+                  selectSem(year ? year : notes.year, "2");
+                }}
+              >
+                EVEN
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -76,35 +89,34 @@ export default function Notes() {
               <Error error="Something Went Wrong" />
             ) : notFound ? (
               <Error error="Not data found :[ " />
-            ) :
-             (
+            ) : (
               notes.subjects.map((subject) => {
                 initailIndex = initailIndex + 1;
                 return (
                   <SubjectList
-                    
                     subject={subject}
                     index={initailIndex}
                     selectSubject={selectSubject}
-                    selectedsub = {selectedSubject}
+                    selectedsub={selectedSubject}
                   />
                 );
               })
             )}
           </div>
-      
         </div>
       </div>
       {loading ? (
-              <Loading />
-            ) : error ? (
-              <Error error="Something Went Wrong" />
-            ) : notFound ? (
-              <div> </div>
-            ) : (
-              <SubjectNotes notes={notes.subjects[selectedSubject].notes} subjectname = {notes.subjects[selectedSubject].name } />
-            )}
-      
+        <Loading />
+      ) : error ? (
+        <Error error="Something Went Wrong" />
+      ) : notFound ? (
+        <div> </div>
+      ) : (
+        <SubjectNotes
+          notes={notes.subjects[selectedSubject].notes}
+          subjectname={notes.subjects[selectedSubject].name}
+        />
+      )}
     </div>
   );
 }

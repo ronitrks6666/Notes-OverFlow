@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import bookstack from '../img/tiny-book-card.jpg'
 
 
 
@@ -17,7 +17,7 @@ export default function SubjectNotes({ notes, subjectname }) {
   function copied(e){
     // to change the copied text to copy and the back to copy
     e.target.innerText = "Copied"
-    setTimeout(()=>{e.target.innerText = "Copy"}, 2000)
+    setTimeout(()=>{e.target.innerText = "Copy"}, 1000)
   }
 
   // console.log(notes);
@@ -49,18 +49,23 @@ export default function SubjectNotes({ notes, subjectname }) {
                     return (
                       <div className="sn-unit-file-box">
                         <div className="sn-unit-file-content">
+                          <div className="sn-uf-img-box">
+                            <img src={bookstack} className="sn-uf-img" alt="" />
+                          </div>
+                          <div className="sn-uf-heading-box">
                           {material.heading}
+                          </div>
                         </div>
 
-                        <div className="sn-unit-file-link mx-auto my-2">
+                        <div className="sn-unit-file-link mx-auto ">
                           <button
                             type="button"
-                            class="btn btn-primary btn-sm download-link"
+                            class="btn btn-primary btn-sm  download-link"
                           >
                             <a href={material.link}> Download </a>
                           </button>
                           <button
-                            className=" btn btn-success btn-sm mx-4"
+                            className=" btn btn-success btn-sm "
                             onClick={(e) => {
                               navigator.clipboard.writeText(material.link);
                               copied(e)

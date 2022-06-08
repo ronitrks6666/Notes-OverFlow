@@ -20,6 +20,9 @@ export default function DriveLink() {
      console.log(text)
     let startIndex = text.indexOf("/d/")
     let endIndex = text.indexOf("/edit")
+    if(endIndex == -1){
+      endIndex = text.indexOf("/view")
+    }
      let downLink = `https://drive.google.com/uc?export=download&id=${text.substring(startIndex+3,endIndex)}`
     console.log(downLink)
 

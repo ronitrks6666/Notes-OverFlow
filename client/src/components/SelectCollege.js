@@ -1,53 +1,87 @@
 import React, { useState } from "react";
 import carousel1 from "../img/carousel-1.jpg";
-
-
-
-
+import students from "../img/graduate-student.jpg";
 
 
 
 
 export default function SelectCollege() {
+  const [inputText, setinputText] = useState("");
+  const [stateCollege, setstateCollege] = useState("College..");
+  const [stateBranch, setstateBranch] = useState("Branch...");
 
-    const [inputText, setinputText] = useState('')
+  function collegeFunc(e) {
+    setstateCollege(e.target.value);
+  }
+  function branchFunc(e) {
+    setstateBranch(e.target.value);
+  }
 
+  function searchData(){
+    console.log(stateCollege , stateBranch)
+    localStorage.setItem("NOF_COLLEGE", stateCollege);
+    localStorage.setItem("NOF_BRANCH" , stateBranch)
+    window.location.href = "/selectyear";
+  }
 
-
-   
-
-
-    function searchCollege(e){
-        e.preventDefault()
-        localStorage.setItem("NOF_COLLEGE", inputText);
-        window.location.href = "/selectyear"
-        console.log(inputText)
-    }
-    return (
-        <div className="SelectCollege-box">
-            <div className="selectCollege-carousel">
-                <img className="carousel-img" src={carousel1} alt="" />
-
-                <div className="carousel-img-input-b">
-                    <div class="carousel-input-container">
-                        <h1 class="heading">Enter your College here </h1>
-                        
-                        <form onSubmit={searchCollege}>
-                            <div class="searchInputWrapper">
-                            <input
-                                class="searchInput"
-                                type="text"
-                                placeholder="focus here to search"
-                                value={inputText}
-                                onChange={e => setinputText(e.target.value)}
-                            />
-                            <i class="searchInputIcon fa fa-search"></i>
-                        </div>
-                            <button style={{display:"none"}} type="submit">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  function searchCollege(e) {
+    e.preventDefault();
+    localStorage.setItem("NOF_COLLEGE", inputText);
+    window.location.href = "/selectyear";
+    console.log(inputText);
+  }
+  return (
+    <div className="SelectCollege-box">
+     
+      <div className="d-flex w-100">
+        <div className="w-60" style={{ width: "60%" }}>
+          <img style={{ width: "100%" }} src={students} alt="" />
         </div>
-    );
+        <div
+          className=" home-right-box"
+          style={{ width: "40%", border: "1px solid red" }}
+        >
+          <div className="select-college">
+            <div className="sc-heading">
+              <h3>Select your College</h3>
+            </div>
+
+            <select
+              name=""
+              className="collegeSelect custom-select"
+              onChange={(e) => setstateCollege(e.target.value)}
+              value={stateCollege}
+              id="inputGroupSelect01"
+            >
+              <option selected>Choose...</option>
+              <option value="SRM">SRM</option>
+              <option value="hello">ONfde</option>
+              <option value="hello">ONfdfde</option>
+            </select>
+          </div>
+          <div className="select-branch">
+            <div className="sc-heading">
+              <h3>Select your Branch</h3>
+            </div>
+
+            <select
+              name=""
+              className="branchSelect custom-select"
+              onChange={(e) => setstateBranch(e.target.value)}
+              value={stateBranch}
+              id="inputGroupSelect02"
+            >
+              <option selected>Choose...</option>
+              <option value="CSE">CSE</option>
+              <option value="hello">ONfde</option>
+              <option value="hello">ONfdfde</option>
+            </select>
+          </div>
+          <div className="submit-btn">
+            <button onClick={()=>{searchData()}} className="btn btn-success">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
