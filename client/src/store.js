@@ -11,6 +11,7 @@ import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getAllSubjectReducer } from "./reducers/SubjectReducer";
+import { addNewDataReducer } from "./reducers/aPostReducer";
 // import { getAllPizzasReducer } from "./reducers/pizzaReducers";
 // import { CartReducer } from "./reducers/cartReducers";
 // import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
@@ -25,7 +26,8 @@ const finalReducer = combineReducers({
 //   loginUserReducer:loginUserReducer,
 //   placeOrderReducer:placeOrderReducer,
 //   getOrdersDetail:getOrderReducer
-     getAllSubjectReducer : getAllSubjectReducer
+     getAllSubjectReducer : getAllSubjectReducer,
+     addNewDataReducer:addNewDataReducer
 });
 
 // const cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []

@@ -18,7 +18,7 @@ export default function Notes() {
   const dispatch = useDispatch();
 
   const Notes = useSelector((state) => state.getAllSubjectReducer);
-  const { notes, error, loading, notFound, year, sem  } = Notes;
+  const { notes, error, loading, notFound, year, sem } = Notes;
 
   let initailIndex = 0;
   const [selectedSubject, setselectedSubject] = useState(0);
@@ -42,20 +42,26 @@ export default function Notes() {
   return (
     <div>
       <div className="select-sem">
+        <h3>
+          <button className="mx-5 btn btn-danger back-btn">
+            <i class="fa fa-angle-left mx-1"></i>
+            <Link to="/selectyear">BACK </Link>
+          </button>
+        </h3>
         <div className="select-sem-heading">
           <h3>Semester</h3>
         </div>
         <div className="select-sem-option">
           <div className={`ss-option ${sem == "1" ? "ss-option-active" : ""}`}>
-          <div className="sem-select-text">
-            <Link 
-              to={`?year=${year ? year : notes.year}&sem=1`}
-              onClick={() => {
-                selectSem(year ? year : notes.year, "1");
-              }}
-            >
-              ODD
-            </Link>
+            <div className="sem-select-text">
+              <Link
+                to={`?year=${year ? year : notes.year}&sem=1`}
+                onClick={() => {
+                  selectSem(year ? year : notes.year, "1");
+                }}
+              >
+                ODD
+              </Link>
             </div>
           </div>
           <div className={`ss-option ${sem == "2" ? "ss-option-active" : ""}`}>

@@ -7,9 +7,11 @@ const notes = require('./models/notesModel')
 
 
 const db = require('./db')
+app.use(express.json());
 const port = process.env.PORT || 8000
 
 const notesRoute = require('./routes/NotesRoute')
+
 app.use('/api',notesRoute)
 
 

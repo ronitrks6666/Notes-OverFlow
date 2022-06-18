@@ -24,26 +24,26 @@ export default function SelectCollege() {
     window.location.href = "/selectyear";
   }
 
-  function searchCollege(e) {
-    e.preventDefault();
-    localStorage.setItem("NOF_COLLEGE", inputText);
-    window.location.href = "/selectyear";
-    console.log(inputText);
-  }
+
   return (
     <div className="SelectCollege-box">
      
-      <div className="d-flex w-100">
-        <div className="w-60" style={{ width: "60%" }}>
+      <div className=" content-box-1 w-100">
+
+      
+
+        <div className="w-60 left-img-box" >
           <img style={{ width: "100%" }} src={students} alt="" />
         </div>
+
         <div
           className=" home-right-box"
-          style={{ width: "40%", border: "1px solid red" }}
+          
         >
-          <div className="select-college">
+         <div className="input-select-box">
+         <div className="select-college">
             <div className="sc-heading">
-              <h3>Select your College</h3>
+              <h4>Select your College</h4>
             </div>
 
             <select
@@ -61,7 +61,7 @@ export default function SelectCollege() {
           </div>
           <div className="select-branch">
             <div className="sc-heading">
-              <h3>Select your Branch</h3>
+              <h4>Select your Branch</h4>
             </div>
 
             <select
@@ -77,11 +77,13 @@ export default function SelectCollege() {
               <option value="hello">ONfdfde</option>
             </select>
           </div>
+         </div>
           <div className="submit-btn">
-            <button onClick={()=>{searchData()}} className="btn btn-success">Search</button>
+            <button onClick={()=>{searchData()}} className="btn coll-branch-sbtn btn-success">Search</button>
           </div>
         </div>
+        
       </div>
     </div>
-  );
+  ); 
 }
