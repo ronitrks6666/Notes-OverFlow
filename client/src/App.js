@@ -11,6 +11,8 @@ import ASelectCollege from './admin/components/ASelectCollege';
 import ASelectYear from './admin/components/ASelectYear';
 import AdminLogin from './screens/AdminLogin';
 import AEarn from './admin/screen/aEarn';
+import Earn from './screens/Earn';
+import CampDetail from './screens/CampDetail';
 
 
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/selectyear" exact element={<Overview />} />
           <Route path="/note" exact element={<Notes />} />
+          <Route path="/earn" exact element={<Earn /> } />
+          <Route path='campaigndetail' exact element={<CampDetail/> } />
           <Route path='/drivelink' exact element={<DriveLink />} />
           <Route path='/adminlogin' exact element={<AdminLogin/> } />
           <Route path='/admin' exact element={<ASelectCollege /> } />

@@ -3,7 +3,7 @@ const router = experss.Router();
 const notes = require("../models/notesModel");
 const collegeDB = require("../models/collegeModel")
 const adminAuth = require('../models/adminAuthModel')
-
+const campaignDB = require('../models/campModel')
 
 
 
@@ -62,30 +62,30 @@ router.post("/v4/newdata", async (req, res) => {
     }
 
     const collegeExist = await collegeDB.find({
-      college:college
+      college: college
     })
-    if(collegeExist.length > 0){
+    if (collegeExist.length > 0) {
       await collegeDB.updateOne(
         {
-          college:college
+          college: college
         },
         {
           $push: {
             "branch": [
-              {branchName:branch}
+              { branchName: branch }
             ],
           }
         }
-      ); 
+      );
       console.log("College already in DB");
-     
-   
-    }else{
+
+
+    } else {
       console.log("adding new college")
-      const collegePost =  new collegeDB ({
-        college:college,
-        branch:[{
-          branchName:branch
+      const collegePost = new collegeDB({
+        college: college,
+        branch: [{
+          branchName: branch
         }]
       })
       collegePost.save()
@@ -222,7 +222,7 @@ router.get("/notes/:college/:year", async (req, res) => {
   }
 });
 
-router.get("/college", async (req,res)=>{
+router.get("/college", async (req, res) => {
   try {
     const college = await collegeDB.find()
     console.log(college)
@@ -235,8 +235,8 @@ router.get("/college", async (req,res)=>{
 
 
 // admin pasword auth
-router.get('/auth',async(req,res)=>{
-  console.log("server req") 
+router.get('/auth', async (req, res) => {
+  console.log("server req")
   try {
     const pass = await adminAuth.find()
     res.send(pass[0].password)
@@ -245,6 +245,44 @@ router.get('/auth',async(req,res)=>{
   }
 })
 
+
+router.post('/v4/postcamp', async (req, res) => {
+  const data = req.body.data
+  try {
+    console.log('postingcamp',data) 
+    const camp = new campaignDB({
+      title: data.title,
+      subtitle: data.subtitle,
+      amount: data.amount,
+      detail: data.detail,
+      faq: data.faq,
+      link: data.link
+    })
+    camp.save()
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+router.get('/v4/getallcamp', async (req, res) => {
+ const id = req.query.id 
+ if(id){
+  const camps = await campaignDB.find({_id:id})
+  res.send(camps)
+ }
+ else{
+  try {
+    const camps = await campaignDB.find()
+    console.log("get all camp" ,camps)
+    res.send(camps)
+  } catch (error) {
+    console.log(error)
+  }
+ }
+  
+
+ 
+})
 
 
 module.exports = router;

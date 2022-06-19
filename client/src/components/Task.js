@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { CampGetAction } from '../../actions/aEarnAction'
-import trophy from '../../img/trophy.jpg'
+import { CampGetAction } from '../actions/aEarnAction'
+import trophy from '../img/trophy.jpg'
 
 
 
@@ -34,9 +35,11 @@ export default function Task({item}) {
                     <div className='amount-currency'>Rupee</div>
                 </div>
                 <div className="t-a-btn">
+                    <Link to='/campaigndetail'>
                     <button onClick={()=>{
                         getOneCamp(item._id)
-                    }} className="btn task-start-btn">Get Started</button>
+                    }} className="btn task-start-btn"> Get Started</button>
+                    </Link>
                 </div>
             </div>
             </div>
