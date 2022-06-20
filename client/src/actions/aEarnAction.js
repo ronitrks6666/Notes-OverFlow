@@ -24,12 +24,13 @@ export const campPostAction = (data) => async (dispatch) => {
 
 export const CampGetAction = (id) => async (dispatch) => {
 
+
     if (id) {
         dispatch({ type: 'GET_ONE_CAMP_REQUEST' })
         try {
             const response = await axios.get(`/api/v4/getallcamp?id=${id}`)
             console.log(response.data)
-            dispatch({ type: "GET_ONE_CAMP_SUCCESS", payload: { data: response.data } })
+            dispatch({ type: "GET_ONE_CAMP_SUCCESS", payload: { data: response.data[0] } })
         } catch (error) {
             console.log(error)
             dispatch({ type: "GET_ONE_CAMP_FAILED", payload: error })

@@ -11,6 +11,10 @@ a{
   color: black;
 }
 
+/* body{
+  background-color: rgba(202, 235, 247, 0.062);
+} */
+
 .link{
   text-decoration: underline;
   color: blue;
@@ -785,7 +789,110 @@ body {
 }
 
 
+.camp-content-box{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
+.camp-task-box{
+  width: auto;
+}
+
+.camp-bottom-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+.camp-form{
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  border-radius: 3%;
+  padding: 20px;
+  /* width: 400px; */
+}
+
+.class-form-input-box{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.camp-form-label{
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.red-star{
+  color: red;
+}
+
+.camp-num-code{
+  margin-left: 3px;
+  font-weight: 500;
+}
+
+.camp-form-hint{
+  margin: 5px 0px;
+  font-weight: bold;
+}
+
+.camp-number-input-div{
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.425);
+}
+
+.camp-from-input{
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.425);
+  height: 35px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.camp-num-input{
+  border: none;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.camp-submitbtn-box{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.camp-detail{
+  border: 1px solid rgba(128, 128, 128, 0.185);
+  width: 90%;
+  margin: 30px auto;
+  padding: 10px 20px;
+}
+
+.camp-detial-heading{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+
+
+
+
+/* Congrats */
+ 
+
+
+
+
+/* coongrats end */
 
 
 
