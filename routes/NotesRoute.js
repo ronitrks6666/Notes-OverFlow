@@ -1,12 +1,10 @@
 const experss = require("express");
 const router = experss.Router();
 const notes = require("../models/notesModel");
-const collegeDB = require("../models/collegeModel")
-const adminAuth = require('../models/adminAuthModel')
-const campaignDB = require('../models/campModel')
-
-
-
+const collegeDB = require("../models/collegeModel");
+const adminAuth = require("../models/adminAuthModel");
+const campaignDB = require("../models/campModel");
+const campUserDB = require("../models/campUser");
 
 router.post("/v4/newdata", async (req, res) => {
   // const data = req.body.data
@@ -31,8 +29,6 @@ router.post("/v4/newdata", async (req, res) => {
     } else {
       console.log("Need to add new ", data);
       res.send(data);
-
-
 
       const newnotes = new notes({
         college: data.college,
@@ -62,49 +58,41 @@ router.post("/v4/newdata", async (req, res) => {
     }
 
     const collegeExist = await collegeDB.find({
-      college: college
-    })
+      college: college,
+    });
     if (collegeExist.length > 0) {
       await collegeDB.updateOne(
         {
-          college: college
+          college: college,
         },
         {
           $push: {
-            "branch": [
-              { branchName: branch }
-            ],
-          }
+            branch: [{ branchName: branch }],
+          },
         }
       );
       console.log("College already in DB");
-
-
     } else {
-      console.log("adding new college")
+      console.log("adding new college");
       const collegePost = new collegeDB({
         college: college,
-        branch: [{
-          branchName: branch
-        }]
-      })
-      collegePost.save()
+        branch: [
+          {
+            branchName: branch,
+          },
+        ],
+      });
+      collegePost.save();
     }
   } catch (error) {
     console.log(error);
   }
 });
 
-
-
-
-
-
-
 router.post("/populate", async (req, res) => {
   const { data } = req.body;
   //if !noteID (add note) if !subjectid (add subject) else(add material)
-  const { dataID, subjectID, noteID, toPost } = data
+  const { dataID, subjectID, noteID, toPost } = data;
   try {
     //  await notes.updateOne({
     //     _id: '62a61949dc0f920ae99fc687',
@@ -113,7 +101,6 @@ router.post("/populate", async (req, res) => {
     //     {$push:{'subjects.0.notes.$.material':
     //     [{ material_id: "hfklahfhoabfoab", heading: "Prime", link: "wwo.prime.com" }]
 
-
     if (!subjectID && !noteID) {
       await notes.updateOne(
         {
@@ -121,52 +108,38 @@ router.post("/populate", async (req, res) => {
         },
         {
           $push: {
-            "subjects": [
-              toPost
-            ],
-          }
+            subjects: [toPost],
+          },
         }
       );
-    }
-    else if (!noteID) {
+    } else if (!noteID) {
       await notes.updateOne(
         {
           _id: dataID,
         },
         {
           $push: {
-            "subjects.$[s].notes": [
-              toPost
-            ],
-          }
+            "subjects.$[s].notes": [toPost],
+          },
         },
         {
-          arrayFilters: [
-            { 's._id': subjectID }
-          ],
-        },
+          arrayFilters: [{ "s._id": subjectID }],
+        }
       );
-    }
-    else {
+    } else {
       await notes.updateOne(
         {
           _id: dataID,
         },
         {
           $push: {
-            "subjects.$[s].notes.$[n].material": [
-              toPost
-            ],
-          }
+            "subjects.$[s].notes.$[n].material": [toPost],
+          },
         },
         {
-          arrayFilters: [
-            { 's._id': subjectID },
-            { 'n._id': noteID }
-          ],
-        },
+          arrayFilters: [{ "s._id": subjectID }, { "n._id": noteID }],
+        }
       );
-
     }
     // await notes.updateOne(
     //   {
@@ -187,10 +160,6 @@ router.post("/populate", async (req, res) => {
     //   },
     // );
 
-
-
-
-
     console.log("posted");
     const alreadyexist = await notes.find({
       $and: [{ year: "3" }, { sem: "2" }],
@@ -202,17 +171,18 @@ router.post("/populate", async (req, res) => {
   }
 });
 
-router.get("/notes/:college/:year", async (req, res) => {
+router.get("/notes/:college/:branch/:year", async (req, res) => {
   const college = req.params.college;
+  const branch = req.params.branch
   const year = req.params.year;
   let sem = req.query.sem;
-  console.log(college, year, sem);
+  console.log(college,branch,year, sem) ;
   if (!sem) {
     sem = "1";
   }
   try {
     const note = await notes.find({
-      $and: [{ college: college }, { year: year }, { sem: sem }],
+      $and: [{ college: college },{branch:branch} , { year: year }, { sem: sem }],
     });
     // const note = await notes.find({"_id":'629d024ca83af658df637020'})
     console.log(note);
@@ -224,71 +194,79 @@ router.get("/notes/:college/:year", async (req, res) => {
 
 router.get("/college", async (req, res) => {
   try {
-    const college = await collegeDB.find()
-    console.log(college)
-    res.send(college)
+    const college = await collegeDB.find();
+    console.log(college);
+    res.send(college);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
-
-
+});
 
 // admin pasword auth
-router.get('/auth', async (req, res) => {
-  console.log("server req")
+router.get("/auth", async (req, res) => {
+  console.log("server req");
   try {
-    const pass = await adminAuth.find()
-    res.send(pass[0].password)
+    const pass = await adminAuth.find();
+    res.send(pass[0].password);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
-
-router.post('/v4/postcamp', async (req, res) => {
-  const data = req.body.data
+router.post("/v4/postcamp", async (req, res) => {
+  const data = req.body.data;
   try {
-    console.log('postingcamp',data) 
+    console.log("postingcamp", data);
     const camp = new campaignDB({
       title: data.title,
       subtitle: data.subtitle,
       amount: data.amount,
       detail: data.detail,
       faq: data.faq,
-      link: data.link
-    })
-    camp.save()
+      link: data.link,
+    });
+    camp.save();
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
-router.get('/v4/getallcamp', async (req, res) => {
- const id = req.query.id 
- if(id){
-  const camps = await campaignDB.find({_id:id})
-  res.send(camps)
- }
- else{
+router.get("/v4/getallcamp", async (req, res) => {
+  const id = req.query.id;
+  if (id) {
+    const camps = await campaignDB.find({ _id: id });
+    res.send(camps);
+  } else {
+    try {
+      const camps = await campaignDB.find();
+      console.log("get all camp", camps);
+      res.send(camps);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+});
+
+// to store campaign user details
+
+router.post("/v4/postcampuser", (req, res) => {
+  const data = req.body.data;
   try {
-    const camps = await campaignDB.find()
-    console.log("get all camp" ,camps)
-    res.send(camps)
+    console.log("posting camp user", data);
+    const user = new campUserDB({
+      camp_id: data.camp_id,
+      user_number: data.user_number,
+      user_email: data.user_email,
+      user_upi: data.user_upi,
+    });
+
+    user.save();
   } catch (error) {
-    console.log(error)
+    console.log("error in posting campaign user", error);
   }
- }
-  
-
- 
-})
-
+});
 
 module.exports = router;
-
-
-
 
 // working modal
 

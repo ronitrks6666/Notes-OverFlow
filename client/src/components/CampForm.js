@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import validator from 'validator'
+import { campUserPostAction } from '../actions/aEarnAction'
 import CongratPage from './CongratPage'
 
 
@@ -13,6 +15,7 @@ import CongratPage from './CongratPage'
 
 export default function CampForm() {
 
+    const dispatch = useDispatch()
     const [number, setnumber] = useState('')
     const [email, setemail] = useState('')
     const [upi, setupi] = useState('')
@@ -47,6 +50,15 @@ export default function CampForm() {
             setcantEmpty(false)
             setsubmitStatus(true)
             console.log('Submiting Form', number, email)
+            const id = localStorage.getItem("CAMP_ID")
+            const data={
+                camp_id:id,
+                user_number:number,
+                user_email:email,
+                user_upi:upi
+            }
+            dispatch(campUserPostAction(data))
+           
         }
 
 

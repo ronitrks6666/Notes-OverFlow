@@ -33,6 +33,7 @@ export const getAllSubject = (curyear , cursem) => async (dispatch) => {
       year = curyear
     }
     let college=localStorage.getItem("NOF_COLLEGE") ?localStorage.getItem("NOF_COLLEGE") : window.location.href = "/"
+    let branch = localStorage.getItem("NOF_BRANCH") ?localStorage.getItem("NOF_BRANCH") : window.location.href = "/"
     college =college.toUpperCase()
    
 
@@ -167,7 +168,7 @@ export const getAllSubject = (curyear , cursem) => async (dispatch) => {
     //     }
     //   ]
     // };
-    const response = await axios.get(`/api/notes/${college}/${year}?sem=${sem}`)
+    const response = await axios.get(`/api/notes/${college}/${branch}/${year}?sem=${sem}`)
     console.log(response.data)
     if (!response.data){
       dispatch({type:"GET_SUBJECT_NULL" , payload:{notFound:"No data Found :[" , year:year ,sem:sem}})

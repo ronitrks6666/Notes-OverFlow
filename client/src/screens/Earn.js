@@ -31,10 +31,7 @@ export default function Earn() {
     const html = '<h1>hello </h1>'
     return (
         <div>
-            <div dangerouslySetInnerHTML={{ __html: html}}></div>
-            <div className="task-popup">
-                Popup to display form, steps , T&C 
-            </div>
+           
             <div className='task-container'>
                 {loading ? (<Loading/> ): error ? (<Error/>) : (
                     camp.map((item)=>{
