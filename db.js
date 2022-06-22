@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 
 
@@ -6,8 +7,7 @@ const mongoose = require('mongoose')
 
 
 
-
-var mongourl = "mongodb+srv://admin:admin123@cluster0.rchti.mongodb.net/note_overflow?retryWrites=true&w=majority"
+var mongourl = process.env.MONGO_URL
 
 
 mongoose.connect(mongourl,{

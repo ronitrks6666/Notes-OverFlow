@@ -5,6 +5,11 @@ const collegeDB = require("../models/collegeModel");
 const adminAuth = require("../models/adminAuthModel");
 const campaignDB = require("../models/campModel");
 const campUserDB = require("../models/campUser");
+require('dotenv').config()
+
+
+
+
 
 router.post("/v4/newdata", async (req, res) => {
   // const data = req.body.data
@@ -298,7 +303,7 @@ router.post("/v4/postcampuser", (req, res) => {
       service: 'gmail',
       auth: {
         user: 'notesoverflow.query@gmail.com',
-        pass: 'hiti gqmg jjpl jawe'
+        pass: process.env.GMAIL_PASS
       }
     });
 

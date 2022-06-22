@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const notes = require('./models/notesModel')
-
+require('dotenv').config()
 
 
 
@@ -17,7 +17,7 @@ app.use('/api',notesRoute)
 
 
 
-
+ 
  
 app.listen(8000,(req,res)=>{
     console.log("Server is running :]")
