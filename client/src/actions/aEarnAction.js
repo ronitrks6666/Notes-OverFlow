@@ -23,6 +23,7 @@ export const campUserPostAction = (data) => async (dispatch) =>{
     dispatch({type:"GET_USERPOST_REQUEST"})
     console.log('sending data' , data)
     try{
+        
         const response = await axios.post('/api/v4/postcampuser', {data:data} )
         console.log(response)
     }

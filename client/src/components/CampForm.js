@@ -13,7 +13,7 @@ import CongratPage from './CongratPage'
 
 
 
-export default function CampForm() {
+export default function CampForm({camplink}) {
 
     const dispatch = useDispatch()
     const [number, setnumber] = useState('')
@@ -53,6 +53,7 @@ export default function CampForm() {
             const id = localStorage.getItem("CAMP_ID")
             const data={
                 camp_id:id,
+                camp_link:camplink,
                 user_number:number,
                 user_email:email,
                 user_upi:upi

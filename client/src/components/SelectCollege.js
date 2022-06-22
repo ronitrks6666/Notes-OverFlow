@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import students from "../img/graduate-student.jpg";
+import students from "../img/graduate-student-1.png";
 import { checkAuth } from '../actions/authAction';       
 import { useDispatch } from "react-redux";
 
@@ -32,7 +32,7 @@ export default function ASelectCollege() {
 
 
   useEffect(() => {
-    dispatch(checkAuth())
+  //  dispatch(checkAuth())
     fetch("/api/college")
       .then((res) => res.json())
       .then((data) => { setcollege(data) });

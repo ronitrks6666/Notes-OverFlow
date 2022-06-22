@@ -45,7 +45,7 @@ export default function CampDetail() {
           </div>
 
           <div className="camp-bottom-box">
-            <CampForm />
+            <CampForm camplink={campitem.link}/>
 
             <div className="camp-detail">
               <div className="camp-detial-heading">

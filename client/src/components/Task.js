@@ -7,7 +7,7 @@ export default function Task({ item }) {
   const dispatch = useDispatch();
   console.log(item);
 
-  function getOneCamp(id) {
+  function getOneCamp(id,link) {
     localStorage.setItem("CAMP_ID", id);
   }
 
@@ -30,7 +30,7 @@ export default function Task({ item }) {
             <Link to="/campaigndetail">
               <button
                 onClick={() => {
-                  getOneCamp(item._id);
+                  getOneCamp(item._id,item.link);
                 }}
                 className="btn task-start-btn"
               >

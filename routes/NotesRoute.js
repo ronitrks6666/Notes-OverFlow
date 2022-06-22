@@ -176,13 +176,13 @@ router.get("/notes/:college/:branch/:year", async (req, res) => {
   const branch = req.params.branch
   const year = req.params.year;
   let sem = req.query.sem;
-  console.log(college,branch,year, sem) ;
+  console.log(college, branch, year, sem);
   if (!sem) {
     sem = "1";
   }
   try {
     const note = await notes.find({
-      $and: [{ college: college },{branch:branch} , { year: year }, { sem: sem }],
+      $and: [{ college: college }, { branch: branch }, { year: year }, { sem: sem }],
     });
     // const note = await notes.find({"_id":'629d024ca83af658df637020'})
     console.log(note);
@@ -247,6 +247,37 @@ router.get("/v4/getallcamp", async (req, res) => {
   }
 });
 
+
+var nodemailer = require('nodemailer');
+
+router.get('/v4/sendmail', async (req, res) => {
+
+  console.log('sending mail')
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'notesoverflow.query@gmail.com',
+      pass: 'hiti gqmg jjpl jawe'
+    }
+  });
+
+  var mailOptions = {
+    from: 'notesoverflow.query@gmail.com',
+    to: 'ronitrks6666@gmail.com',
+    subject: 'Sending Email using Node.js',
+    html: '<h1>That was easy!</h1>'
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+})
+
 // to store campaign user details
 
 router.post("/v4/postcampuser", (req, res) => {
@@ -261,6 +292,30 @@ router.post("/v4/postcampuser", (req, res) => {
     });
 
     user.save();
+
+    console.log('sending mail')
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'notesoverflow.query@gmail.com',
+        pass: 'hiti gqmg jjpl jawe'
+      }
+    });
+
+    var mailOptions = {
+      from: 'notesoverflow.query@gmail.com',
+      to: `${data.user_email}`,
+      subject: 'Sending Email using Node.js',
+      html: `<h1>That was easy!</h1><br><button><a href='${data.camp_link}'>Click here to start</a></button>`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
   } catch (error) {
     console.log("error in posting campaign user", error);
   }

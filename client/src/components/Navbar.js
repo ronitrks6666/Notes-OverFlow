@@ -26,11 +26,15 @@ export default function Navbar() {
                                 <Link class="nav-link active" aria-current="page" to="/">Home</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" to="#">Clubs</Link>
-                            </li>
-                            <li class="nav-item">
                                 <Link class="nav-link " to="/earn" tabindex="-1" aria-disabled="true">Earn</Link>
                             </li>
+                            <li class="nav-item">
+                                <Link class="nav-link" to="/contribute">Contribute</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link" to="/aboutus">About Us</Link>
+                            </li>
+                            
                         </ul>
                        
                     </div>

@@ -4,7 +4,7 @@ import oneIcon from "../img/1-icon.png";
 import twoIcon from "../img/2-icon.jpg";
 import threeIcon from "../img/3-icon.png";
 import fourIcon from "../img/4-icon.png";
-import boySittingLaptop from "../img/boy-sitting-laptop.png";
+import boySittingLaptop from "../img/boy-sitting-laptop-1.png";
 
 export default function SelectYear() {
   // to check if college is present in local storage
