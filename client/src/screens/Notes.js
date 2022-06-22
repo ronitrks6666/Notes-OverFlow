@@ -11,9 +11,7 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 
 export default function Notes() {
-  window.onpopstate = () => {
-    navigate("/selectyear");
-  };
+
 
   const dispatch = useDispatch();
 
