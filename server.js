@@ -8,7 +8,7 @@ const  path = require('path')
 
 const db = require('./db')
 app.use(express.json());
-const port = process.env.PORT || 8000
+
 
 const notesRoute = require('./routes/NotesRoute')
 
@@ -25,6 +25,6 @@ if(process.env.NODE_ENV==='production'){
 
  
  
-app.listen(port,(req,res)=>{
+app.listen(process.env.PORT || 8000,(req,res)=>{
     console.log("Server is running :]")
 })
