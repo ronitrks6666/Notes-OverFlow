@@ -11,12 +11,12 @@ import bookstack from '../../img/tiny-book-card.jpg'
 
 export default function SubjectNotes({ notes, subjectname ,toggledisplaypop,collect_id ,subjectid,noteid}) {
 
-  const [copyText, setcopyText] = useState('Copy')
+  const [copyText, setcopyText] = useState('Share Link')
 
   function copied(e){
     // to change the copied text to copy and the back to copy
     e.target.innerText = "Copied"
-    setTimeout(()=>{e.target.innerText = "Copy"}, 1000)
+    setTimeout(()=>{e.target.innerText = "Share Link"}, 1000)
   }
 
   // console.log(notes);
@@ -25,14 +25,14 @@ export default function SubjectNotes({ notes, subjectname ,toggledisplaypop,coll
     <div>
       <div className="subject-notes">
         <div className="subject-notes-heading">
-          <h4>{subjectname}</h4>
+          <h2>{subjectname}</h2>
         </div>
         <div className="subject-notes-unit">
           {notes.map((note) => {
             return (
               <div className="sn-units ">
                 <div className="sn-unit-heading">
-                  {note.title} 
+                <h3>{note.title}</h3> 
                   <button onClick={()=>{
                     toggledisplaypop();
                     collect_id(noteid,subjectid,note._id)

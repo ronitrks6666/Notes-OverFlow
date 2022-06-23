@@ -12,12 +12,12 @@ export default function SubjectNotes({ notes, subjectname }) {
 
 
 
-  const [copyText, setcopyText] = useState('Copy')
+  const [copyText, setcopyText] = useState('Share Link')
 
   function copied(e){
     // to change the copied text to copy and the back to copy
     e.target.innerText = "Copied"
-    setTimeout(()=>{e.target.innerText = "Copy"}, 1000)
+    setTimeout(()=>{e.target.innerText = "Share Link"}, 1000)
   }
 
   // console.log(notes);
@@ -32,7 +32,7 @@ export default function SubjectNotes({ notes, subjectname }) {
             return (
               <div className="sn-units ">
                 <div className="sn-unit-heading">
-                  {note.title}
+                  <h2>{note.title}</h2>
                   <div className="sn-unit-studyGuide">
                     <p>
                       Confused about topics?
