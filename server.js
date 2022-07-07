@@ -11,8 +11,11 @@ app.use(express.json());
 
 
 const notesRoute = require('./routes/NotesRoute')
- 
+const contributeRoute = require('./routes/ContributeRoute')
+
+
 app.use('/api',notesRoute)
+app.use('/api', contributeRoute)
 
 
 const __dirname1 = path.resolve();

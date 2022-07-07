@@ -73,3 +73,17 @@ export const updateData = (body) =>async (dispatch)=>{
         dispatch({type:"UPDATE_FAILED",payload:error}) 
     }
 }
+
+
+export const addcontribute = (data)=>async (dispatch) =>{
+    dispatch({type:"ADD_CONTRIBUTE_REQUEST"})
+     
+    try {
+        console.log(data)
+        const response =await axios.post('/api/v4/contribute',{data:data})
+        console.log(response.data)
+        dispatch({type:"ADD_CONTRIBUTE_SUCCESS"})
+    } catch (error) {
+        dispatch({type:"ADD_CONTRIBUTE_FAILED",payload:error}) 
+    }
+  }
