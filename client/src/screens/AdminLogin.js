@@ -40,7 +40,7 @@ export default function AdminLogin() {
             <div className="login-btn">
                 <button className="btn btn-danger" onClick={()=>{loginauth()}}>Login</button>
             </div>
-        </div>
+        </div>  
     </div>
   )
 }
