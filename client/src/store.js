@@ -4,11 +4,6 @@ import { applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 
-
-
-
-
-
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getAllSubjectReducer } from "./reducers/SubjectReducer";
 import { addNewDataReducer } from "./reducers/aPostReducer";
@@ -22,7 +17,6 @@ const finalReducer = combineReducers({
      getOneCampReducer:getOneCampReducer,
      getAllCampReducer:getAllCampReducer
 });
-
 
 const composeEnhacers = composeWithDevTools({});
 
