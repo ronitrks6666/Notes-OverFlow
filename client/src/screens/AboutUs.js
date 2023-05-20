@@ -29,7 +29,7 @@ export default function AboutUs() {
             </div>
             <div className="au-action-method">
               <button className="btn btn-danger">
-                <a href="">Gmail</a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=ronit.kumar07@gmail.com" target="_blank">Gmail</a>
               </button>
               <button className="btn btn-success mx-2">
                 <a href="">WhatsApp</a>
