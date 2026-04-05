@@ -33,7 +33,7 @@ export default function ASelectCollege() {
 
   useEffect(() => {
   //  dispatch(checkAuth())
-    fetch("/api/college")
+    fetch("/api/colleg")
       .then((res) => res.json())
       .then((data) => { setcollege(data) });
   }, [])
