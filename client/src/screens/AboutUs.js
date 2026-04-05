@@ -25,7 +25,7 @@ export default function AboutUs() {
           </div>
           <div className="au-body-action">
             <div className="au-action-text">
-              <h5>Contact us | Collaborate with us </h5>
+              <h5>Contact us</h5>
             </div>
             <div className="au-action-method">
               <button className="btn btn-danger">
